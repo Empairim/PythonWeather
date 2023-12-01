@@ -6,3 +6,19 @@ from datetime import date
 
 db = PostgresqlDatabase('contacts', user='titus',
                         password='1023', host='localhist', port=5432)
+
+
+class ContactModel(Model):
+    class Meta:
+        database = db
+
+
+class Contact(ContactModel):
+    first_name = CharField()
+    last_name = CharField()
+    phone_number = CharField()
+
+
+db.connect()
+db.create_tables([ContactModel])
+db.close()
